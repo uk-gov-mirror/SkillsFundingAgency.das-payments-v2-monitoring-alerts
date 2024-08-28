@@ -20,7 +20,7 @@ A set of alerts are configured in Application Insights by DevOps that will be tr
 * Submission Metrics Generation Failed
 * Estimated Provider Accuracy Outside Tolerance
 
-When triggered, this alerts are set up to execute the Monitoring Alerts function using its HTTP endpoint, passing a JSON payload containing the Application Insights data related to the alert.
+When triggered, these alerts are set up to execute the Monitoring Alerts function using its HTTP endpoint, passing a JSON payload containing the Application Insights data related to the alert.
 
 The function then calls the Slack API, posting the alert message, available metrics related to the alert, and a link to the Application Insights trace information.
 
@@ -28,9 +28,7 @@ The function then calls the Slack API, posting the alert message, available metr
 
 ### Pre-Requisites
 
-* An Azure DevBox configured for Payments V2 development
-
-Setup instructions: https://skillsfundingagency.atlassian.net/wiki/spaces/NDL/pages/950927878/Development+Environment+-+Payments+V2+DAS+Space
+Setup instructions can be found at the following link, which will help you set up your environment and access the correct repositories: https://skillsfundingagency.atlassian.net/wiki/spaces/NDL/pages/950927878/Development+Environment+-+Payments+V2+DAS+Space
 
 ### Config
 
