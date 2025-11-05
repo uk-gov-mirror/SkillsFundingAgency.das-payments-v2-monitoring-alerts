@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.Monitoring.Alerts.Function", "SFA.DAS.Payments.Monitoring.Alerts.Function\SFA.DAS.Payments.Monitoring.Alerts.Function.csproj", "{3136EA2D-BD6B-4F1F-81B0-8149E12281BE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests", "SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests\SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.csproj", "{70610FBD-5F9E-4CB3-877C-7C010321311A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3136EA2D-BD6B-4F1F-81B0-8149E12281BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3136EA2D-BD6B-4F1F-81B0-8149E12281BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3136EA2D-BD6B-4F1F-81B0-8149E12281BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3136EA2D-BD6B-4F1F-81B0-8149E12281BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70610FBD-5F9E-4CB3-877C-7C010321311A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70610FBD-5F9E-4CB3-877C-7C010321311A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70610FBD-5F9E-4CB3-877C-7C010321311A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70610FBD-5F9E-4CB3-877C-7C010321311A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C7DDD482-9720-4588-89DF-37633E43227F}
+	EndGlobalSection
+EndGlobal
