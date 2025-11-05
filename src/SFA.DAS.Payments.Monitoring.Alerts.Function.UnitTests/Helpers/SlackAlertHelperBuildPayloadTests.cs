@@ -23,6 +23,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         private string _yearToDatePayments;
         private string _numberOfLearners;
         private string _accountedForPayments;
+        private AlertParameters _alertParameters;
 
         [SetUp]
         public void Setup()
@@ -38,6 +39,21 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             _yearToDatePayments = "22222";
             _numberOfLearners = "6789";
             _accountedForPayments = "23222";
+
+            _alertParameters = new AlertParameters
+            {
+                AlertEmoji = _alertEmoji,
+                Timestamp = _timeStamp,
+                JobId = _jobId,
+                AcademicYear = _academicYear,
+                CollectionPeriod = _collectionPeriod,
+                CollectionPeriodPayments = _collectionPeriodPayments,
+                YearToDatePayments = _yearToDatePayments,
+                NumberOfLearners = _numberOfLearners,
+                AccountedForPayments = _accountedForPayments,
+                AlertTitle = _alertTitle,
+                AppInsightsSearchResultsUiLink = _appInsightsSearchResultsUiLink
+            };
         }
 
 
@@ -50,17 +66,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                                                  _timeStamp,
-                                                  _jobId,
-                                                  _academicYear,
-                                                  _collectionPeriod,
-                                                  _collectionPeriodPayments,
-                                                  _yearToDatePayments,
-                                                  _numberOfLearners,
-                                                  _accountedForPayments,
-                                                  _alertTitle,
-                                                  _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result.Should().BeOfType<List<Block>>();
@@ -74,17 +80,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[0].Type.Should().Be("header");
@@ -97,17 +93,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[0].Text.Type.Should().Be("plain_text");
@@ -120,17 +106,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[0].Text.Text.Should().Be("alert_emoji alertTitle.");
@@ -143,17 +119,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Type.Should().Be("section");
@@ -166,17 +132,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Text.Text.Should().Be($"<{_appInsightsSearchResultsUiLink}|View in Azure App Insights>");
@@ -189,17 +145,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Text.Type.Should().Be("mrkdwn");
@@ -212,17 +158,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields.Count.Should().Be(8);
@@ -236,17 +172,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             //Arrange
             var helper = new SlackAlertHelper();
 
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[1].Type.Should().Be("mrkdwn");
@@ -260,17 +186,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[2].Type.Should().Be("plain_text");
@@ -284,17 +200,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[3].Type.Should().Be("plain_text");
@@ -308,17 +214,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[4].Type.Should().Be("mrkdwn");
@@ -332,17 +228,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[5].Type.Should().Be("mrkdwn");
@@ -356,17 +242,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[0].Type.Should().Be("mrkdwn");
@@ -380,17 +256,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[1].Type.Should().Be("mrkdwn");
@@ -404,17 +270,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[4].Type.Should().Be("mrkdwn");
@@ -428,17 +284,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[5].Type.Should().Be("mrkdwn");
@@ -452,17 +298,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[6].Type.Should().Be("plain_text");
@@ -476,17 +312,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[1].Fields[7].Type.Should().Be("plain_text");
@@ -500,17 +326,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             var decimalValue = Convert.ToDecimal(_yearToDatePayments);
@@ -523,19 +339,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.YearToDatePayments = "nil";
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                "nil",
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[2].Type.Should().Be("plain_text");
@@ -549,17 +356,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             var decimalValue = Convert.ToDecimal(_collectionPeriodPayments);
@@ -572,19 +369,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.CollectionPeriodPayments = "nil";
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                "nil",
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[3].Type.Should().Be("plain_text");
@@ -598,17 +386,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[6].Type.Should().Be("plain_text");
@@ -622,17 +400,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var helper = new SlackAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             var decimalValue = Convert.ToDecimal(_accountedForPayments);
@@ -645,19 +413,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.AccountedForPayments = "nil";
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                "nil",
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result[2].Fields[7].Type.Should().Be("plain_text");
@@ -669,19 +428,13 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.CollectionPeriodPayments = string.Empty;
+            _alertParameters.YearToDatePayments = string.Empty;
+            _alertParameters.NumberOfLearners = string.Empty;
+            _alertParameters.AccountedForPayments = string.Empty;
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                string.Empty,
-                string.Empty,
-                string.Empty,
-                string.Empty,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result.Count.Should().Be(2);
@@ -692,19 +445,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.CollectionPeriodPayments = string.Empty;
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                string.Empty,
-                _yearToDatePayments,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result.Count.Should().Be(3);
@@ -719,19 +463,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.YearToDatePayments = string.Empty;
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                string.Empty,
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result.Count.Should().Be(3);
@@ -746,19 +481,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.NumberOfLearners = string.Empty;
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                string.Empty,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result.Count.Should().Be(3);
@@ -770,19 +496,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.AccountedForPayments = string.Empty;
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                _yearToDatePayments,
-                _numberOfLearners,
-                string.Empty,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             result.Count.Should().Be(3);
@@ -799,19 +516,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
             var helper = new SlackAlertHelper();
+            _alertParameters.YearToDatePayments = "nil";
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                _collectionPeriodPayments,
-                "nil",
-                _numberOfLearners,
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             var jsonString = JsonSerializer.Serialize(result, serializeOptions);
 
@@ -829,19 +537,12 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Arrange
             var helper = new SlackAlertHelper();
+            _alertParameters.CollectionPeriodPayments = "\"" + _collectionPeriodPayments;
+            _alertParameters.YearToDatePayments = _yearToDatePayments + "\"";
+            _alertParameters.NumberOfLearners = "\"" + _numberOfLearners + "\"";
 
             //Act
-            var result = helper.BuildSlackPayload(_alertEmoji,
-                _timeStamp,
-                _jobId,
-                _academicYear,
-                _collectionPeriod,
-                "\"" + _collectionPeriodPayments,
-                _yearToDatePayments + "\"",
-                "\"" + _numberOfLearners + "\"",
-                _accountedForPayments,
-                _alertTitle,
-                _appInsightsSearchResultsUiLink);
+            var result = helper.BuildSlackPayload(_alertParameters);
 
             //Assert
             var decimalValue = Convert.ToDecimal(_collectionPeriodPayments);

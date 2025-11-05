@@ -6,17 +6,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
 {
     public class SlackAlertHelper : ISlackAlertHelper
     {
-        public List<Block> BuildSlackPayload(string alertEmoji,
-                                              DateTime timestamp,
-                                              string jobId,
-                                              string academicYear,
-                                              string collectionPeriod,
-                                              string collectionPeriodPayments,
-                                              string yearToDatePayments,
-                                              string numberOfLearners,
-                                              string accountedForPayments,
-                                              string alertTitle,
-                                              string appInsightsSearchResultsUiLink)
+        public List<Block> BuildSlackPayload(AlertParameters alertParameters)
         {
             var blocks = new List<Block>
             {
@@ -26,7 +16,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                     Text = new BlockData
                     {
                         Type = "plain_text",
-                        Text = $"{alertEmoji} {alertTitle}."
+                        Text = $"{alertParameters.AlertEmoji} {alertParameters.AlertTitle}."
                     }
                 },
                 new Block
@@ -35,32 +25,31 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                     Text = new BlockData
                     {
                         Type = "mrkdwn",
-                        Text = $"<{appInsightsSearchResultsUiLink}|View in Azure App Insights>"
+                        Text = $"<{alertParameters.AppInsightsSearchResultsUiLink}|View in Azure App Insights>"
                     },
                     Fields = new List<BlockData>
                     {
                         new BlockData { Type = "mrkdwn", Text = "*Timestamp*" },
                         new BlockData { Type = "mrkdwn", Text = "*Job*" },
-                        new BlockData { Type = "plain_text", Text = timestamp.ToString("f") },
-                        new BlockData { Type = "plain_text", Text = jobId },
+                        new BlockData { Type = "plain_text", Text = alertParameters.Timestamp.ToString("f") },
+                        new BlockData { Type = "plain_text", Text = alertParameters.JobId },
                         new BlockData { Type = "mrkdwn", Text = "*Academic Year*" },
                         new BlockData { Type = "mrkdwn", Text = "*Collection Period*" },
-                        new BlockData { Type = "plain_text", Text = academicYear },
-                        new BlockData { Type = "plain_text", Text = collectionPeriod }
+                        new BlockData { Type = "plain_text", Text = alertParameters.AcademicYear },
+                        new BlockData { Type = "plain_text", Text = alertParameters.CollectionPeriod }
                     }
                 }
             };
 
-            if (!string.IsNullOrWhiteSpace(yearToDatePayments) 
-                || !string.IsNullOrWhiteSpace(collectionPeriodPayments) 
-                || !string.IsNullOrWhiteSpace(numberOfLearners)
-                || !string.IsNullOrWhiteSpace(accountedForPayments))
+            if (!string.IsNullOrWhiteSpace(alertParameters.YearToDatePayments) 
+                || !string.IsNullOrWhiteSpace(alertParameters.CollectionPeriodPayments) 
+                || !string.IsNullOrWhiteSpace(alertParameters.NumberOfLearners)
+                || !string.IsNullOrWhiteSpace(alertParameters.AccountedForPayments))
             {
-                var optionalBlock = AddOptionalBlockFields(collectionPeriodPayments, yearToDatePayments, numberOfLearners, accountedForPayments);
+                var optionalBlock = AddOptionalBlockFields(alertParameters.CollectionPeriodPayments, alertParameters.YearToDatePayments, alertParameters.NumberOfLearners, alertParameters.AccountedForPayments);
 
                 blocks.Add(optionalBlock);
             }
-
 
             return blocks;
         }

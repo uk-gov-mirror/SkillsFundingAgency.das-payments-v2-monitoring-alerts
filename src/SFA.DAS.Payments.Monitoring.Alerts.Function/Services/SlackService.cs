@@ -62,21 +62,24 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                                           string appInsightsSearchResultsUiLink,
                                           DateTime timestamp)
         {
-            string alertTitle = _slackAlertHelper.GetSlackAlertTitle(alertDescription, alertVariables);
-            
+            var alertParameters = new AlertParameters
+            {
+                AlertEmoji = alertEmoji,
+                Timestamp = timestamp,
+                JobId = alertVariables["JobId"],
+                AcademicYear = alertVariables["AcademicYear"],
+                CollectionPeriod = alertVariables["CollectionPeriod"],
+                CollectionPeriodPayments = alertVariables["CollectionPeriodPayments"],
+                YearToDatePayments = alertVariables["YearToDatePayments"],
+                NumberOfLearners = alertVariables["NumberOfLearners"],
+                AccountedForPayments = alertVariables["AccountedForPayments"],
+                AlertTitle = _slackAlertHelper.GetSlackAlertTitle(alertDescription, alertVariables),
+                AppInsightsSearchResultsUiLink = appInsightsSearchResultsUiLink
+            };
+
             var slackPayload = new SlackPayload
             {
-                Blocks = _slackAlertHelper.BuildSlackPayload(alertEmoji,
-                                       timestamp,
-                                       alertVariables["JobId"],
-                                       alertVariables["AcademicYear"],
-                                       alertVariables["CollectionPeriod"],
-                                       alertVariables["CollectionPeriodPayments"],
-                                       alertVariables["YearToDatePayments"],
-                                       alertVariables["NumberOfLearners"],
-                                       alertVariables["AccountedForPayments"],
-                                       alertTitle,
-                                       appInsightsSearchResultsUiLink)
+                Blocks = _slackAlertHelper.BuildSlackPayload(alertParameters)
             };
             
             var serializeOptions = new JsonSerializerOptions

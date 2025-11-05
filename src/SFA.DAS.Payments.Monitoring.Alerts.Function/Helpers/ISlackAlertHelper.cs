@@ -8,17 +8,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
     {
         public string GetEmoji(string severity);
 
-        public List<Block> BuildSlackPayload(string alertEmoji,
-                                              DateTime timestamp,
-                                              string jobId,
-                                              string academicYear,
-                                              string collectionPeriod,
-                                              string collectionPeriodPayments,
-                                              string yearToDatePayments,
-                                              string numberOfLearners,
-                                              string accountedForPayments,
-                                              string alertTitle,
-                                              string appInsightsSearchResultsUiLink);
+        public List<Block> BuildSlackPayload(AlertParameters alertParameters);
 
         public Dictionary<string, string> ExtractAlertVariables(dynamic customMeasurements, dynamic customDimensions, DateTime timestamp);
 
