@@ -17,8 +17,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
         private readonly ISlackAlertHelper _slackAlertHelper;
         private readonly ISlackClient _slackClient;
         private readonly IDynamicJsonDeserializer _deserializer;
-        private ILogger _logger;
-
+        
         public SlackService(IDynamicJsonDeserializer deserializer,
                             ISlackAlertHelper slackAlertHelper,
                             ISlackClient slackClient,
@@ -30,10 +29,8 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
             _slackClient = slackClient;
         }
 
-        public async Task PostSlackAlert(ILogger logger, string appInsightsAlertPayload, string slackChannelUri)
+        public async Task PostSlackAlert(string appInsightsAlertPayload, string slackChannelUri)
         {
-            _logger = logger;
-
             dynamic alert = _deserializer.Deserialize(appInsightsAlertPayload);
 
             string searchResultApiUrl = alert.data.alertContext.condition.allOf[0].linkToSearchResultsAPI;
@@ -88,8 +85,6 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
             var jsonData = JsonSerializer.Serialize(slackPayload, serializeOptions);
-
-            _logger.LogInformation($"JSON payload sending to Slack API: {jsonData} ");
 
             await _slackClient.PostAsJsonAsync(slackChannelUri, jsonData);
         }

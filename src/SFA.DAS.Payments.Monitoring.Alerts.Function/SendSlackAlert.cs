@@ -30,7 +30,7 @@ namespace SFA.DAS.Monitoring.Alerts.Function
 
             log.LogInformation($"Request: {requestBody}.");
 
-            await _slackService.PostSlackAlert(log, requestBody, slackChannelUri);
+            await _slackService.PostSlackAlert(requestBody, slackChannelUri);
 
             return new OkObjectResult("");
         }
@@ -46,7 +46,7 @@ namespace SFA.DAS.Monitoring.Alerts.Function
 
             log.LogInformation($"Request: {requestBody}.");
 
-            await _slackService.PostSlackAlert(log, requestBody, slackChannelUri);
+            await _slackService.PostSlackAlert(requestBody, slackChannelUri);
 
             return new OkObjectResult("");
         }
