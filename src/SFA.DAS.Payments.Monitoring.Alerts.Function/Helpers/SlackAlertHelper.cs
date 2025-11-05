@@ -218,8 +218,8 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                                        customMeasurements["InLearning"].ToString() :
                                        "n/a";
 
-            string accountedForPayments = customMeasurements.ContainsKey("Total") ?
-                                            customMeasurements["Total"].ToString() :
+            string accountedForPayments = customMeasurements.ContainsKey("AccountedForPayments") ?
+                                            customMeasurements["AccountedForPayments"].ToString() :
                                             "n/a";
 
             return new Dictionary<string, string>
