@@ -8,7 +8,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Services;
 
-namespace SFA.DAS.Monitoring.Alerts.Function
+namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 {
     public class SendSlackAlert
     {
@@ -20,13 +20,15 @@ namespace SFA.DAS.Monitoring.Alerts.Function
         }
 
         [FunctionName("HttpTrigger1")]
-        public async Task<IActionResult> SendToChannelOne([HttpTrigger(AuthorizationLevel.Function, "get","post", Route = null)] HttpRequest req, ILogger log)
+        public async Task<IActionResult> SendToChannelOne(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            var slackChannelUri = Environment.GetEnvironmentVariable("SlackChannelUri", EnvironmentVariableTarget.Process);
+            var slackChannelUri =
+                Environment.GetEnvironmentVariable("SlackChannelUri", EnvironmentVariableTarget.Process);
 
             log.LogInformation("HttpTrigger1 function processed a request.");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
             log.LogInformation($"Request: {requestBody}.");
 
@@ -36,13 +38,15 @@ namespace SFA.DAS.Monitoring.Alerts.Function
         }
 
         [FunctionName("HttpTrigger2")]
-        public async Task<IActionResult> SendToChannelTwo([HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
+        public async Task<IActionResult> SendToChannelTwo(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            var slackChannelUri = Environment.GetEnvironmentVariable("SlackChannelUri2", EnvironmentVariableTarget.Process);
+            var slackChannelUri =
+                Environment.GetEnvironmentVariable("SlackChannelUri2", EnvironmentVariableTarget.Process);
 
             log.LogInformation("HttpTrigger2 function processed a request.");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
             log.LogInformation($"Request: {requestBody}.");
 

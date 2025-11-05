@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
+namespace SFA.DAS.Payments.Monitoring.Alerts.Function.JsonHelpers
 {
     public class ObjectAsPrimitiveConverter : JsonConverter<object>
     {
@@ -26,34 +26,35 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                 case JsonTokenType.String:
                     return reader.GetString();
                 case JsonTokenType.Number:
-                    {
-                        if (reader.TryGetInt32(out var i))
-                            return i;
-                        if (reader.TryGetInt64(out var l))
-                            return l;
-                        else if (reader.TryGetDouble(out var d))
-                            return d;
-                        using var doc = JsonDocument.ParseValue(ref reader);
-                        return doc.RootElement.Clone();
+                {
+                    if (reader.TryGetInt32(out var i))
+                        return i;
+                    if (reader.TryGetInt64(out var l))
+                        return l;
+                    if (reader.TryGetDouble(out var d))
+                        return d;
+                    using var doc = JsonDocument.ParseValue(ref reader);
+                    return doc.RootElement.Clone();
 
-                        throw new JsonException(string.Format("Cannot parse number {0}", doc.RootElement.ToString()));
-                    }
+                    throw new JsonException(string.Format("Cannot parse number {0}", doc.RootElement.ToString()));
+                }
                 case JsonTokenType.StartArray:
+                {
+                    var list = new List<object>();
+                    while (reader.Read())
                     {
-                        var list = new List<object>();
-                        while (reader.Read())
+                        switch (reader.TokenType)
                         {
-                            switch (reader.TokenType)
-                            {
-                                default:
-                                    list.Add(Read(ref reader, typeof(object), options));
-                                    break;
-                                case JsonTokenType.EndArray:
-                                    return list;
-                            }
+                            default:
+                                list.Add(Read(ref reader, typeof(object), options));
+                                break;
+                            case JsonTokenType.EndArray:
+                                return list;
                         }
-                        throw new JsonException();
                     }
+
+                    throw new JsonException();
+                }
                 case JsonTokenType.StartObject:
                     var dict = CreateDictionary();
                     while (reader.Read())
@@ -71,13 +72,16 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                                 throw new JsonException();
                         }
                     }
+
                     throw new JsonException();
                 default:
                     throw new JsonException(string.Format("Unknown token {0}", reader.TokenType));
             }
         }
 
-        protected virtual IDictionary<string, object> CreateDictionary() =>
-            new ExpandoObject();
+        protected virtual IDictionary<string, object> CreateDictionary()
+        {
+            return new ExpandoObject();
+        }
     }
 }
