@@ -100,7 +100,7 @@ stages:
       appName: DCOL-PP-MonitoringAlerts1-WEU
 
 - stage: Deploy_PD
-  dependsOn: Deploy_MP
+  dependsOn: Deploy_PP
   displayName: Deploy to PD
   variables:
   - name: tagEnvironment
