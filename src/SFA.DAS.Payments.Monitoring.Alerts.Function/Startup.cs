@@ -15,11 +15,6 @@ using SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
-// To be done later: local settings document needs to be updated at some point with the new url and general environment variables as per the readme
-// Modify slackclient to be teamsclient
-// Modify slackservice
-
-
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 {
     public class Startup : FunctionsStartup
