@@ -15,6 +15,11 @@ using SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
+// To be done later: local settings document needs to be updated at some point with the new url and general environment variables as per the readme
+// Modify slackclient to be teamsclient
+// Modify slackservice
+
+
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 {
     public class Startup : FunctionsStartup
@@ -28,14 +33,11 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
             AddAppInsightsClient(builder);
 
             builder.Services
-                .AddHttpClient<ISlackClient, SlackClient>(x =>
-                {
-                    x.BaseAddress = new Uri(GetEnvironmentVariable("SlackBaseUrl"));
-                });
+                .AddHttpClient<ITeamsClient, TeamsClient>();
 
             builder.Services.AddTransient<IDynamicJsonDeserializer, DynamicJsonDeserializer>();
-            builder.Services.AddTransient<ISlackAlertHelper, SlackAlertHelper>();
-            builder.Services.AddTransient<ISlackService, SlackService>();
+            builder.Services.AddTransient<ITeamsAlertHelper, TeamsAlertHelper>();
+            builder.Services.AddTransient<ITeamsService, TeamsService>();
         }
 
         private static void AddAppInsightsClient(IFunctionsHostBuilder builder)

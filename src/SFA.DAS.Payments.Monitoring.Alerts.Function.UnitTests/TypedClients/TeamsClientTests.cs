@@ -11,7 +11,7 @@ using System;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.TypedClients
 {
-    public class SlackClientTests
+    public class TeamsClientTests
     {
         private Mock<HttpMessageHandler> _mockHttpMessageHandlerOkStatus;
 
@@ -39,7 +39,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.TypedClients
         {
             //Arrange
             var httpClient = new HttpClient(_mockHttpMessageHandlerOkStatus.Object);
-            var slackClient = new SlackClient(httpClient);
+            var slackClient = new TeamsClient(httpClient);
 
             //Act
             var jsonPayload = @"{ ""property"": ""value"" }";
@@ -57,7 +57,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.TypedClients
         {
             //Arrange
             var httpClient = new HttpClient(_mockHttpMessageHandlerOkStatus.Object);
-            var slackClient = new SlackClient(httpClient);
+            var slackClient = new TeamsClient(httpClient);
 
             //Act
             Func<Task<HttpResponseMessage>> act = () => slackClient.PostAsJsonAsync("http://someurl.com/somepath", null);
@@ -74,7 +74,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.TypedClients
         {
             //Arrange
             var httpClient = new HttpClient(_mockHttpMessageHandlerOkStatus.Object);
-            var slackClient = new SlackClient(httpClient);
+            var slackClient = new TeamsClient(httpClient);
 
             //Act
             var jsonPayload = @"{ ""property"": ""value"" }";
@@ -96,7 +96,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.TypedClients
         {
             //Arrange
             var httpClient = new HttpClient(_mockHttpMessageHandlerOkStatus.Object);
-            var slackClient = new SlackClient(httpClient);
+            var slackClient = new TeamsClient(httpClient);
 
             //Act
             var jsonPayload = @"{ ""property"": ""value"" }";
@@ -127,7 +127,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.TypedClients
                 .Verifiable();
 
             var httpClient = new HttpClient(httpMessageHandler.Object);
-            var slackClient = new SlackClient(httpClient);
+            var slackClient = new TeamsClient(httpClient);
 
             //Act
             var jsonPayload = @"{ ""property"": ""value"" }";

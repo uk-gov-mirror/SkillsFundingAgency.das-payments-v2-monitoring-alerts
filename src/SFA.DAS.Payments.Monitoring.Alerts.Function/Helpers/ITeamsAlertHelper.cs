@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
 {
-    public interface ISlackAlertHelper
+    public interface ITeamsAlertHelper
     {
         public string GetEmoji(string severity);
 
-        public List<object> BuildSlackPayload(string alertEmoji,
+        public List<object> BuildAlertPayload(string alertEmoji,
                                               DateTime timestamp,
                                               string jobId,
                                               string academicYear,
@@ -17,8 +17,8 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
 
         public Dictionary<string, string> ExtractAlertVariables(dynamic customMeasurements, dynamic customDimensions, DateTime timestamp);
 
-        public string GetSlackAlertTitle(string alertTitleFormat, Dictionary<string, string> alertVariables);
+        public string GetAlertTitle(string alertTitleFormat, Dictionary<string, string> alertVariables);
 
-        public string GetSlackAlertText(string alertTextFormat, Dictionary<string, string> alertVariables);
+        public string GetAlertText(string alertTextFormat, Dictionary<string, string> alertVariables);
     }
 }

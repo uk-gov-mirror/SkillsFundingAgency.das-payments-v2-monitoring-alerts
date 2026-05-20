@@ -14,7 +14,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         public void GetEmojiSeverity0ReturnsCorrectEmojiCode(string input, string expectedOutput)
         {
             //Arrange
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
             var act = helper.GetEmoji(input);

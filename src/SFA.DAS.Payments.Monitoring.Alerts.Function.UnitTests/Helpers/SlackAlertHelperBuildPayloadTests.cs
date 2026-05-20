@@ -20,10 +20,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -47,10 +47,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -78,10 +78,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -110,10 +110,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -142,10 +142,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -173,10 +173,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -205,10 +205,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -237,10 +237,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -271,10 +271,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -305,10 +305,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -339,10 +339,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -373,10 +373,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -407,10 +407,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -441,10 +441,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,
@@ -475,10 +475,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             var academicYear = "academicYear";
             var collectionPeriod = "collectionPeriod";
 
-            var helper = new SlackAlertHelper();
+            var helper = new TeamsAlertHelper();
 
             //Act
-            var result = helper.BuildSlackPayload(alertEmoji,
+            var result = helper.BuildAlertPayload(alertEmoji,
                                                   timeStamp,
                                                   jobId,
                                                   academicYear,

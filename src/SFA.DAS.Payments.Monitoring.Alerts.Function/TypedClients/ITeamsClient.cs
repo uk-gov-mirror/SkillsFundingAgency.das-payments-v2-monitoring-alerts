@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients
 {
-    public interface ISlackClient
+    public interface ITeamsClient
     {
         public Task<HttpResponseMessage> PostAsJsonAsync(string requestUrl, object jsonPayload);
     }

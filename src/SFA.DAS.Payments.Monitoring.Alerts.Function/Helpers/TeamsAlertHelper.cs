@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
 {
-    public class SlackAlertHelper : ISlackAlertHelper
+    public class TeamsAlertHelper : ITeamsAlertHelper
     {
-        public List<object> BuildSlackPayload(string alertEmoji,
+        public List<object> BuildAlertPayload(string alertEmoji,
                                               DateTime timestamp,
                                               string jobId,
                                               string academicYear,
@@ -125,7 +125,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
             };
         }
 
-        public string GetSlackAlertTitle(string alertTitleFormat, Dictionary<string, string> alertVariables)
+        public string GetAlertTitle(string alertTitleFormat, Dictionary<string, string> alertVariables)
         {
             foreach (var alertVariable in alertVariables)
             {
@@ -135,7 +135,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
             return alertTitleFormat;
         }
 
-        public string GetSlackAlertText(string alertTextFormat, Dictionary<string, string> alertVariables)
+        public string GetAlertText(string alertTextFormat, Dictionary<string, string> alertVariables)
         {
             foreach (var alertVariable in alertVariables)
             {
