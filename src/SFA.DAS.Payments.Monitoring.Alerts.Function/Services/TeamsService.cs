@@ -63,14 +63,28 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
             
             var teamsPayload = new
             {
-                text = alertTitle,
-                blocks = _teamsAlertHelper.BuildAlertPayload(alertEmoji,
-                                       timestamp,
-                                       alertVariables["JobId"],
-                                       alertVariables["AcademicYear"],
-                                       alertVariables["CollectionPeriod"],
-                                       alertTitle,
-                                       appInsightsSearchResultsUiLink)
+                attachments = new List<object>(){
+                    new
+                    {
+                        contentType = "application/vnd.microsoft.card.adaptive",
+                        content = new
+                        {
+                            schema = "https://adaptivecards.io/schemas/adaptive-card.json%22",
+                            type = "AdaptiveCard",
+                            version = "1.5",
+                            body = new List<object>()
+                            {
+                                _teamsAlertHelper.BuildAlertPayload(alertEmoji,
+                                    timestamp,
+                                    alertVariables["JobId"],
+                                    alertVariables["AcademicYear"],
+                                    alertVariables["CollectionPeriod"],
+                                    alertTitle,
+                                    appInsightsSearchResultsUiLink)
+                            }
+                        }
+                    }
+                }
             };
 
             await _teamsClient.PostAsJsonAsync(teamsWebhookURL, teamsPayload);

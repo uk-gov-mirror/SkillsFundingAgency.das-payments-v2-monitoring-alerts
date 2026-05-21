@@ -7,7 +7,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
     {
         public string GetEmoji(string severity);
 
-        public List<object> BuildAlertPayload(string alertEmoji,
+        public object BuildAlertPayload(string alertEmoji,
                                               DateTime timestamp,
                                               string jobId,
                                               string academicYear,
