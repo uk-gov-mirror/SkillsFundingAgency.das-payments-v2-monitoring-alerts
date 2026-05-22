@@ -69,7 +69,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                         contentType = "application/vnd.microsoft.card.adaptive",
                         content = new
                         {
-                            schema = "https://adaptivecards.io/schemas/adaptive-card.json%22",
+                            schema = "https://adaptivecards.io/schemas/adaptive-card.json",
                             type = "AdaptiveCard",
                             version = "1.5",
                             body = new List<object>()

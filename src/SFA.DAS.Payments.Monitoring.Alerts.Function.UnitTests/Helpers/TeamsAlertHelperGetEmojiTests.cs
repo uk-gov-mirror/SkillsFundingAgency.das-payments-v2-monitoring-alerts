@@ -4,7 +4,7 @@ using SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
 {
-    public class SlackAlertHelperGetEmojiTests
+    public class TeamsAlertHelperGetEmojiTests
     {
         [TestCase("Sev0", ":alert:")]
         [TestCase("Sev1", ":alert:")]
