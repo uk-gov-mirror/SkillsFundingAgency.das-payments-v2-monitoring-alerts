@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -32,9 +33,9 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 
             log.LogInformation($"Request: {requestBody}.");
 
-            await _teamsService.PostTeamsAlert(requestBody, teamsWebhookURL);
+            var result = await _teamsService.PostTeamsAlert(requestBody, teamsWebhookURL,log);
 
-            return new OkObjectResult("");
+            return result == null? new OkObjectResult("") : new OkObjectResult(result.exception + "\n" + result.innerException);
         }
 
         [FunctionName("HttpTrigger2")]
@@ -50,7 +51,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 
             log.LogInformation($"Request: {requestBody}.");
 
-            await _teamsService.PostTeamsAlert(requestBody, teamsWebhookURL);
+            await _teamsService.PostTeamsAlert(requestBody, teamsWebhookURL,log);
 
             return new OkObjectResult("");
         }
