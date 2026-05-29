@@ -69,19 +69,62 @@ stages:
       azureSubscription: DCT-VSO
       appName: DCOL-SIT-MonitoringAlerts1-WEU
 
-- stage: Deploy_SDW
+- stage: Deploy_ETE
   dependsOn: Deploy_SIT
-  displayName: Deploy to SDW
+  displayName: Deploy to ETE
   variables:
   - name: tagEnvironment
     value: Dev/Test
-  - group: DCOL-SDW - Environment Key Vault Secrets
+  - group: DCOL-ETE - Environment Key Vault Secrets
   jobs:
   - template: pipeline-templates/deploy.yml
     parameters:
       pool: DCT Build Pool
-      environmentName: SDW
-      azureSubscription: DCOL-Shadow
-      appName: DCOL-SDW-MonitoringAlerts1-WEU
+      environmentName: ETE
+      azureSubscription: DCT-VSO
+      appName: DCOL-ETE-MonitoringAlerts1-WEU
+
+- stage: Deploy_MO
+  dependsOn: Deploy_ETE
+  displayName: Deploy to MO
+  variables:
+  - name: tagEnvironment
+    value: Dev/Test
+  - group: DCOL-MO - Environment Key Vault Secrets
+  jobs:
+  - template: pipeline-templates/deploy.yml
+    parameters:
+      pool: DCT Build Pool
+      environmentName: MO
+      azureSubscription: DCOL-MO-VSTS
+      appName: DCOL-MO-MonitoringAlerts1-WEU
+
+- stage: Deploy_PP
+  dependsOn: Deploy_MO
+  displayName: Deploy to PP
+  variables:
+  - name: tagEnvironment
+    value: Dev/Test
+  - group: DCOL-PP - Environment Key Vault Secrets 
+  jobs:
+  - template: pipeline-templates/deploy.yml
+    parameters:
+      pool: DCT Build Pool
+      environmentName: PP
+      azureSubscription: DCOLPPVSTS
+      appName: DCOL-PP-MonitoringAlerts1-WEU
       
-      
+- stage: Deploy_PD
+  dependsOn: Deploy_PP
+  displayName: Deploy to PD
+  variables:
+  - name: tagEnvironment
+    value: Dev/Test
+  - group: DCOL-PD - Environment Key Vault Secrets 
+  jobs:
+  - template: pipeline-templates/deploy.yml
+    parameters:
+      pool: DCT Build Pool
+      environmentName: PD
+      azureSubscription: DCOLPDVSTS
+      appName: DCOL-PD-MonitoringAlerts1-WEU
