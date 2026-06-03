@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.JsonHelpers;
+using SFA.DAS.Payments.Monitoring.Alerts.Function.Models;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
@@ -77,8 +78,21 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                                           string appInsightsSearchResultsUiLink,
                                           DateTime timestamp)
         {
-            string alertTitle = _teamsAlertHelper.GetAlertTitle(alertDescription, alertVariables);
 
+            var alertParameters = new AlertParameters
+            {
+                AlertEmoji = alertEmoji,
+                Timestamp = timestamp,
+                JobId = alertVariables["JobId"],
+                AcademicYear = alertVariables["AcademicYear"],
+                CollectionPeriod = alertVariables["CollectionPeriod"],
+                CollectionPeriodPayments = alertVariables["CollectionPeriodPayments"],
+                YearToDatePayments = alertVariables["YearToDatePayments"],
+                NumberOfLearners = alertVariables["NumberOfLearners"],
+                AccountedForPayments = alertVariables["AccountedForPayments"],
+                AlertTitle = _teamsAlertHelper.GetAlertTitle(alertDescription, alertVariables),
+                AppInsightsSearchResultsUiLink = appInsightsSearchResultsUiLink
+            };
             var teamsPayload = new
             {
                 attachments = new List<object>(){
@@ -92,13 +106,15 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                             version = "1.5",
                             body = new List<object>()
                             {
-                                _teamsAlertHelper.BuildAlertPayload(alertEmoji,
-                                    timestamp,
-                                    alertVariables["JobId"],
-                                    alertVariables["AcademicYear"],
-                                    alertVariables["CollectionPeriod"],
-                                    alertTitle,
-                                    appInsightsSearchResultsUiLink)
+                                _teamsAlertHelper.BuildAlertPayload(alertParameters)
+                            },
+                            actions = new List<object>()
+                            {
+                                new{
+                                    type= "Action.OpenUrl",
+                                    title= "View in Azure App Insights",
+                                    url= alertParameters.AppInsightsSearchResultsUiLink
+                                }
                             }
                         }
                     }

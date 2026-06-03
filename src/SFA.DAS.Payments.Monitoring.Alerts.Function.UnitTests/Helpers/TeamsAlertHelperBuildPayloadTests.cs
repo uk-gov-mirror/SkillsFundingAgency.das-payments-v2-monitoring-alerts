@@ -4,6 +4,7 @@ using SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SFA.DAS.Payments.Monitoring.Alerts.Function.Models;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
 {
@@ -23,14 +24,16 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         [SetUp]
         public void SetUp()
         {
-            _result = new TeamsAlertHelper().BuildAlertPayload(
-                AlertEmoji,
-                Timestamp,
-                JobId,
-                AcademicYear,
-                CollectionPeriod,
-                AlertTitle,
-                AppInsightsSearchResultsUiLink);
+            _result = new TeamsAlertHelper().BuildAlertPayload(new AlertParameters(){
+                AccountedForPayments = "accountedForPayments",
+                AlertEmoji = AlertEmoji,
+                Timestamp = Timestamp,
+                JobId = JobId,
+                AcademicYear = AcademicYear,
+                CollectionPeriod = CollectionPeriod,
+                AlertTitle = AlertTitle,
+                AppInsightsSearchResultsUiLink = AppInsightsSearchResultsUiLink
+            });
         }
 
         [Test]

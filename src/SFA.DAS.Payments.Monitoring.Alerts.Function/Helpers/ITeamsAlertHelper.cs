@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SFA.DAS.Payments.Monitoring.Alerts.Function.Models;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
 {
@@ -7,13 +8,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
     {
         public string GetEmoji(string severity);
 
-        public object BuildAlertPayload(string alertEmoji,
-                                              DateTime timestamp,
-                                              string jobId,
-                                              string academicYear,
-                                              string collectionPeriod,
-                                              string alertTitle,
-                                              string appInsightsSearchResultsUiLink);
+        public object BuildAlertPayload(AlertParameters alertParameters);
 
         public Dictionary<string, string> ExtractAlertVariables(dynamic customMeasurements, dynamic customDimensions, DateTime timestamp);
 
