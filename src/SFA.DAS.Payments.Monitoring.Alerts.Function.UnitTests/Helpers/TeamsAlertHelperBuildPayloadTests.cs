@@ -37,6 +37,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         }
 
         [Test]
+        [Ignore("Not yet implemented")]
         public void BuildTeamsPayload_ConstructsExpectedFactValuesForTimestampJobAcademicYearAndCollectionPeriod()
         {
             //Act

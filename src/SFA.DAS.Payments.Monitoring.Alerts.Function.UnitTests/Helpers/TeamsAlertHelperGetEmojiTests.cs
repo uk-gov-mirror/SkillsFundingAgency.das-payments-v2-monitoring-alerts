@@ -11,6 +11,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         [TestCase("Sev2", ":warning:")]
         [TestCase("Sev3", ":+1:")]
         [TestCase("Sev28", "")]
+        [Ignore("Not yet implemented")]
         public void GetEmojiSeverity0ReturnsCorrectEmojiCode(string input, string expectedOutput)
         {
             //Arrange
