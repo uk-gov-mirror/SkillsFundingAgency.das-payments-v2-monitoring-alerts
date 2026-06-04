@@ -5,6 +5,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Models
     public class AlertParameters
     {
         public string AlertEmoji { get; set; }
+        public string AlertColour { get; set; }
         public DateTime Timestamp { get; set; }
         public string JobId { get; set; }
         public string AcademicYear { get; set; }
