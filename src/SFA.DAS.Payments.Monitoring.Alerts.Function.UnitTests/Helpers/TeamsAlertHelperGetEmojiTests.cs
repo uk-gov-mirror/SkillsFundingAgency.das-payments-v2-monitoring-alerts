@@ -6,13 +6,13 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
 {
     public class TeamsAlertHelperGetEmojiTests
     {
-        [TestCase("Sev0", ":alert:")]
-        [TestCase("Sev1", ":alert:")]
-        [TestCase("Sev2", ":warning:")]
-        [TestCase("Sev3", ":+1:")]
+        [TestCase("Sev0", "🚨")]
+        [TestCase("Sev1", "🚨")]
+        [TestCase("Sev2", "⚠️")]
+        [TestCase("Sev3", "✅")]
         [TestCase("Sev28", "")]
-        [Ignore("Not yet implemented")]
-        public void GetEmojiSeverity0ReturnsCorrectEmojiCode(string input, string expectedOutput)
+        
+        public void GetEmojiReturnsCorrectEmojiCodeBasedOnSeverity(string input, string expectedOutput)
         {
             //Arrange
             var helper = new TeamsAlertHelper();

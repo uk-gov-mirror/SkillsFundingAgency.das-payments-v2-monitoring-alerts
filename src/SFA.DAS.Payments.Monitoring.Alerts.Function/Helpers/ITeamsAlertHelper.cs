@@ -8,6 +8,8 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
     {
         public string GetEmoji(string severity);
 
+        public string GetBackgroundColour(string severity);
+
         public object BuildAlertPayload(AlertParameters alertParameters);
 
         public Dictionary<string, string> ExtractAlertVariables(dynamic customMeasurements, dynamic customDimensions, DateTime timestamp);

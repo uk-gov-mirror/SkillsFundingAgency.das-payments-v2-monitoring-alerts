@@ -11,6 +11,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
             return new
             {
                 type = "Container",
+                style = alertParameters.AlertColour,
                 items = new List<object>
                 {
                     new
@@ -60,8 +61,19 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
             {
                 "Sev0" or "Sev1" => "🚨",
                 "Sev2" => "⚠️",
-                "Sev3" => "ℹ️",
+                "Sev3" => "✅",
                 _ => string.Empty,
+            };
+        }
+
+        public string GetBackgroundColour(string severity)
+        {
+            return severity switch
+            {
+                "Sev0" or "Sev1" => "Attention", // Red
+                "Sev2" => "Warning", // Yellow
+                "Sev3" => "Good", // Green
+                _ => "Default", // Default to white
             };
         }
 

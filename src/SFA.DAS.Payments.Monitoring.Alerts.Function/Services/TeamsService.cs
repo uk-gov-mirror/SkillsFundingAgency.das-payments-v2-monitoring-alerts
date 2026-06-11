@@ -40,6 +40,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
 
                 var severity = alert.data.essentials.severity;
                 string alertEmoji = _teamsAlertHelper.GetEmoji(severity);
+                string alertColour = _teamsAlertHelper.GetBackgroundColour(severity);
 
                 var appInsightsSearchResultsUiLink = alert.data.alertContext.condition.allOf[0].linkToSearchResultsUI;
 
@@ -53,7 +54,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                         Dictionary<string, string> alertVariables =
                             _teamsAlertHelper.ExtractAlertVariables(customMeasurements, customDimensions, timestamp);
                         string alertDescription = alert.data.essentials.description;
-                        await PostTeamsAlert(alertVariables, teamsWebhookURL, alertDescription, alertEmoji,
+                        await PostTeamsAlert(alertVariables, teamsWebhookURL, alertDescription, alertEmoji, alertColour,
                             appInsightsSearchResultsUiLink, timestamp);
                     }
                 }
@@ -75,6 +76,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                                           string teamsWebhookURL,
                                           string alertDescription,
                                           string alertEmoji,
+                                          string alertColour,
                                           string appInsightsSearchResultsUiLink,
                                           DateTime timestamp)
         {
@@ -82,6 +84,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
             var alertParameters = new AlertParameters
             {
                 AlertEmoji = alertEmoji,
+                AlertColour = alertColour,
                 Timestamp = timestamp,
                 JobId = alertVariables["JobId"],
                 AcademicYear = alertVariables["AcademicYear"],
