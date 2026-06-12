@@ -1,51 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Models;
+using SFA.DAS.Payments.Monitoring.Alerts.Function.Models.TeamsPayload;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
 {
     public class TeamsAlertHelper : ITeamsAlertHelper
     {
-        public object BuildAlertPayload(AlertParameters alertParameters)
+        public TeamsCardContainer BuildAlertPayload(AlertParameters alertParameters)
         {
-            return new
+            return new TeamsCardContainer
             {
-                type = "Container",
-                style = alertParameters.AlertColour,
-                items = new List<object>
+                Type = "Container",
+                Style = alertParameters.AlertColour,
+                Items = new List<TeamsCardItem>
                 {
-                    new
+                    new TeamsCardItem
                     {
-                        type = "TextBlock",
-                        text = $"{alertParameters.AlertEmoji} {alertParameters.AlertTitle}.",
-                        weight = "bolder",
-                        size = "medium",
-                        wrap = true
+                        Type = "TextBlock",
+                        Text = $"{alertParameters.AlertEmoji} {alertParameters.AlertTitle}.",
+                        Weight = "bolder",
+                        Size = "medium",
+                        Wrap = true
                     },
-                    new
+                    new TeamsCardItem
                     {
-                        type = "FactSet",
-                        facts = new List<object>
+                        Type = "FactSet",
+                        Facts = new List<TeamsFact>
                         {
-                            new
+                            new TeamsFact
                             {
-                                title = "Timestamp",
-                                value = alertParameters.Timestamp.ToString("f")
+                                Title = "Timestamp",
+                                Value = alertParameters.Timestamp.ToString("f")
                             },
-                            new
+                            new TeamsFact
                             {
-                                title = "Job",
-                                value = alertParameters.JobId
+                                Title = "Job",
+                                Value = alertParameters.JobId
                             },
-                            new
+                            new TeamsFact
                             {
-                                title = "Academic Year",
-                                value = alertParameters.AcademicYear
+                                Title = "Academic Year",
+                                Value = alertParameters.AcademicYear
                             },
-                            new
+                            new TeamsFact
                             {
-                                title = "Collection Period",
-                                value = alertParameters.CollectionPeriod
+                                Title = "Collection Period",
+                                Value = alertParameters.CollectionPeriod
                             }
                         }
                     },
@@ -82,9 +83,9 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
             return text.Replace("\"", "");
         }
 
-        private static object AddOptionalBlockFields(string collectionPeriodPayments, string yearToDatePayments, string numberOfLearners, string accountedForPayments)
+        private static TeamsCardItem AddOptionalBlockFields(string collectionPeriodPayments, string yearToDatePayments, string numberOfLearners, string accountedForPayments)
         {
-            var optionalFields = new List<object>();
+            var optionalFields = new List<TeamsFact>();
 
             if (!string.IsNullOrWhiteSpace(yearToDatePayments))
             {
@@ -100,7 +101,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                 }
 
 
-                optionalFields.Add(new { title = "Previous Payments Year To Date", value = $"£{yearTodatePaymentsText}" });
+                optionalFields.Add(new TeamsFact { Title = "Previous Payments Year To Date", Value = $"£{yearTodatePaymentsText}" });
             }
             
             if (!string.IsNullOrWhiteSpace(collectionPeriodPayments))
@@ -115,12 +116,12 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                 {
                     collectionPeriodPaymentsText = RemoveInvalidCharacters(collectionPeriodPayments);
                 }
-                optionalFields.Add(new { title = "Collection Period Payments", value = $"£{collectionPeriodPaymentsText}" });
+                optionalFields.Add(new TeamsFact { Title = "Collection Period Payments", Value = $"£{collectionPeriodPaymentsText}" });
             }
             
             if (!string.IsNullOrEmpty(numberOfLearners))
             {
-                optionalFields.Add(new { title = "In Learning", value = RemoveInvalidCharacters(numberOfLearners) });
+                optionalFields.Add(new TeamsFact { Title = "In Learning", Value = RemoveInvalidCharacters(numberOfLearners) });
             }
 
             if (!string.IsNullOrWhiteSpace(accountedForPayments))
@@ -135,13 +136,13 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                 {
                     accountedForPaymentsText = RemoveInvalidCharacters(accountedForPayments);
                 }
-                optionalFields.Add(new { title = "Accounted For Payments", value = $"£{accountedForPaymentsText}" });
+                optionalFields.Add(new TeamsFact { Title = "Accounted For Payments", Value = $"£{accountedForPaymentsText}" });
             }
 
-            return new
+            return new TeamsCardItem
             {
-                type = "FactSet",
-                facts = optionalFields
+                Type = "FactSet",
+                Facts = optionalFields
             };
         }
 
