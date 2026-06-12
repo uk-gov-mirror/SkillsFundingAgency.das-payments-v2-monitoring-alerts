@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.JsonHelpers;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Models;
+using SFA.DAS.Payments.Monitoring.Alerts.Function.Models.TeamsPayload;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
@@ -107,7 +108,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                             schema = "https://adaptivecards.io/schemas/adaptive-card.json",
                             type = "AdaptiveCard",
                             version = "1.5",
-                            body = new List<object>()
+                            body = new List<TeamsCardContainer>()
                             {
                                 _teamsAlertHelper.BuildAlertPayload(alertParameters)
                             },
