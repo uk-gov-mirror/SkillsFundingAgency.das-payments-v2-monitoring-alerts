@@ -20,7 +20,20 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - task: AzureFunctionApp@1
+
+        - task: AzureAppServiceSettings@1
+          displayName: 'Apply Function App Settings'
+          inputs:
+            azureSubscription: ${{ parameters.azureSubscription }}
+            appName: ${{ parameters.appName }}
+            resourceGroupName: ''
+            appSettings: |
+               [
+                { "name": "TeamsWebhookURL2", "value": "$(TeamsWebhookURL2)" }
+                
+               ]
+
+        - task: AzureFunctionApp@2
           displayName: 'Azure Function App Deploy'
           inputs:
             azureSubscription: ${{ parameters.azureSubscription }}
