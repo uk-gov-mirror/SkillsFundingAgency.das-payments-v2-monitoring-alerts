@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients
 {
@@ -25,7 +26,14 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients
                 throw new ArgumentNullException(nameof(jsonPayload));
             }
 
-            var response = await _httpClient.PostAsJsonAsync(requestUrl, jsonPayload);
+            var opt = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
+
+            var json = JsonSerializer.Serialize(jsonPayload, opt);
+
+            var response = await _httpClient.PostAsJsonAsync(requestUrl, json);
 
             response.EnsureSuccessStatusCode();
 

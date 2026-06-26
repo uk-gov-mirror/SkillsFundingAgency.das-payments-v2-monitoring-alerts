@@ -1,10 +1,16 @@
 ﻿using FluentAssertions;
+using Moq;
+using Moq.Protected;
 using NUnit.Framework;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers;
-using System;
-using System.Linq;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Models;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Models.TeamsPayload;
+using SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients;
+using System;
+using System.Linq;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
 {
@@ -24,6 +30,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         private static readonly DateTime Timestamp = new(2003, 11, 11, 10, 10, 10);
 
         private TeamsCardContainer _result;
+        private Mock<HttpMessageHandler> _mockHttpMessageHandlerOkStatus;
 
         [SetUp]
         public void SetUp()
@@ -49,6 +56,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             //Act
             var items = _result.Items;
+
             var factSets = items.Where(x => x.Type == "FactSet").ToList();
 
             var mandatoryFactsContainer = factSets[0];
@@ -82,6 +90,51 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
             optionalFactValuesByTitle.Should().ContainKey("Collection Period Payments").WhoseValue.Should().Be($"£{CollectionPeriodPayments}");
             optionalFactValuesByTitle.Should().ContainKey("In Learning").WhoseValue.Should().Be(NumberOfLearners);
             optionalFactValuesByTitle.Should().ContainKey("Accounted For Payments").WhoseValue.Should().Be($"£{AccountedForPayments}");
+        }
+
+
+
+        [Test]
+        public async Task ValidateTeamsCardJsonForCamelCase()
+        {
+            //Arrange
+            string capturedRequestBody = null;
+
+            _mockHttpMessageHandlerOkStatus = new Mock<HttpMessageHandler>();
+            _mockHttpMessageHandlerOkStatus
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>())
+                .Callback<HttpRequestMessage, CancellationToken>(async (request, _) =>
+                {
+                    capturedRequestBody = await request.Content.ReadAsStringAsync();
+                })
+                .ReturnsAsync(new HttpResponseMessage(System.Net.HttpStatusCode.OK));
+
+            var httpClient = new HttpClient(_mockHttpMessageHandlerOkStatus.Object);
+            var teamsClient = new TeamsClient(httpClient);
+
+            //Act
+            var postUri = "http://someurl.com/somepath";
+            var result = await teamsClient.PostAsJsonAsync(postUri, _result);
+
+            //Assert
+            capturedRequestBody.Should().NotBeNullOrEmpty();
+
+            // Verify camelCase - property names should start with lowercase
+            capturedRequestBody.Should().Contain("\"style\":");
+            capturedRequestBody.Should().Contain("\"type\":");
+            capturedRequestBody.Should().Contain("\"items\":");
+            capturedRequestBody.Should().Contain("\"facts\":");
+            capturedRequestBody.Should().Contain("\"text\":");
+
+            // Verify PascalCase is NOT present
+            capturedRequestBody.Should().NotContain("\"Type\":");
+            capturedRequestBody.Should().NotContain("\"Items\":");
+            capturedRequestBody.Should().NotContain("\"Facts\":");
+            capturedRequestBody.Should().NotContain("\"Text\":");
         }
     }
 }

@@ -56,7 +56,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                             _teamsAlertHelper.ExtractAlertVariables(customMeasurements, customDimensions, timestamp);
                         string alertDescription = alert.data.essentials.description;
                         await PostTeamsAlert(alertVariables, teamsWebhookURL, alertDescription, alertEmoji, alertColour,
-                            appInsightsSearchResultsUiLink, timestamp);
+                            appInsightsSearchResultsUiLink, timestamp, log);
                     }
                 }
 
@@ -79,53 +79,62 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Services
                                           string alertEmoji,
                                           string alertColour,
                                           string appInsightsSearchResultsUiLink,
-                                          DateTime timestamp)
+                                          DateTime timestamp,
+                                          ILogger log)
         {
-
-            var alertParameters = new AlertParameters
+            try
             {
-                AlertEmoji = alertEmoji,
-                AlertColour = alertColour,
-                Timestamp = timestamp,
-                JobId = alertVariables["JobId"],
-                AcademicYear = alertVariables["AcademicYear"],
-                CollectionPeriod = alertVariables["CollectionPeriod"],
-                CollectionPeriodPayments = alertVariables["CollectionPeriodPayments"],
-                YearToDatePayments = alertVariables["YearToDatePayments"],
-                NumberOfLearners = alertVariables["NumberOfLearners"],
-                AccountedForPayments = alertVariables["AccountedForPayments"],
-                AlertTitle = _teamsAlertHelper.GetAlertTitle(alertDescription, alertVariables),
-                AppInsightsSearchResultsUiLink = appInsightsSearchResultsUiLink
-            };
-            var teamsPayload = new
-            {
-                attachments = new List<object>(){
-                    new
+                var alertParameters = new AlertParameters
+                {
+                    AlertEmoji = alertEmoji,
+                    AlertColour = alertColour,
+                    Timestamp = timestamp,
+                    JobId = alertVariables["JobId"],
+                    AcademicYear = alertVariables["AcademicYear"],
+                    CollectionPeriod = alertVariables["CollectionPeriod"],
+                    CollectionPeriodPayments = alertVariables["CollectionPeriodPayments"],
+                    YearToDatePayments = alertVariables["YearToDatePayments"],
+                    NumberOfLearners = alertVariables["NumberOfLearners"],
+                    AccountedForPayments = alertVariables["AccountedForPayments"],
+                    AlertTitle = _teamsAlertHelper.GetAlertTitle(alertDescription, alertVariables),
+                    AppInsightsSearchResultsUiLink = appInsightsSearchResultsUiLink
+                };
+                var teamsPayload = new
+                {
+                    attachments = new List<object>()
                     {
-                        contentType = "application/vnd.microsoft.card.adaptive",
-                        content = new
+                        new
                         {
-                            schema = "https://adaptivecards.io/schemas/adaptive-card.json",
-                            type = "AdaptiveCard",
-                            version = "1.5",
-                            body = new List<TeamsCardContainer>()
+                            contentType = "application/vnd.microsoft.card.adaptive",
+                            content = new
                             {
-                                _teamsAlertHelper.BuildAlertPayload(alertParameters)
-                            },
-                            actions = new List<object>()
-                            {
-                                new{
-                                    type= "Action.OpenUrl",
-                                    title= "View in Azure App Insights",
-                                    url= alertParameters.AppInsightsSearchResultsUiLink
+                                schema = "https://adaptivecards.io/schemas/adaptive-card.json",
+                                type = "AdaptiveCard",
+                                version = "1.5",
+                                body = new List<TeamsCardContainer>()
+                                {
+                                    _teamsAlertHelper.BuildAlertPayload(alertParameters)
+                                },
+                                actions = new List<object>()
+                                {
+                                    new
+                                    {
+                                        type = "Action.OpenUrl",
+                                        title = "View in Azure App Insights",
+                                        url = alertParameters.AppInsightsSearchResultsUiLink
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            };
+                };
 
-            await _teamsClient.PostAsJsonAsync(teamsWebhookURL, teamsPayload);
+                await _teamsClient.PostAsJsonAsync(teamsWebhookURL, teamsPayload);
+            }
+            catch (Exception ex)
+            {
+                log.LogError("Error while processing app insight payload - " + ex.Message);
+            }
         }
     }
 }
