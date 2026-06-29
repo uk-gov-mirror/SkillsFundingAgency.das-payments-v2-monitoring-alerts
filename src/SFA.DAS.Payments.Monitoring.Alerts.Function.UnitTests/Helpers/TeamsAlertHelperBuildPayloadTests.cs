@@ -95,7 +95,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
 
 
         [Test]
-        public async Task ValidateTeamsCardJsonForCamelCase()
+        public void ValidateTeamsCardJsonForCamelCase()
         {
             //Arrange
             string capturedRequestBody = null;
@@ -118,23 +118,24 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
 
             //Act
             var postUri = "http://someurl.com/somepath";
-            var result = await teamsClient.PostAsJsonAsync(postUri, _result);
+            var result = teamsClient.PostAsJsonAsync(postUri, _result);
 
             //Assert
             capturedRequestBody.Should().NotBeNullOrEmpty();
 
             // Verify camelCase - property names should start with lowercase
-            capturedRequestBody.Should().Contain("\"style\":");
-            capturedRequestBody.Should().Contain("\"type\":");
-            capturedRequestBody.Should().Contain("\"items\":");
-            capturedRequestBody.Should().Contain("\"facts\":");
-            capturedRequestBody.Should().Contain("\"text\":");
+            capturedRequestBody.Should().Contain("style\\\":");
+            capturedRequestBody.Should().Contain("type\\\":");
+            capturedRequestBody.Should().Contain("items\\\":");
+            capturedRequestBody.Should().Contain("facts\\\":");
+            capturedRequestBody.Should().Contain("text\\\":");
 
             // Verify PascalCase is NOT present
-            capturedRequestBody.Should().NotContain("\"Type\":");
-            capturedRequestBody.Should().NotContain("\"Items\":");
-            capturedRequestBody.Should().NotContain("\"Facts\":");
-            capturedRequestBody.Should().NotContain("\"Text\":");
+            capturedRequestBody.Should().NotContain("Style\\\":");
+            capturedRequestBody.Should().NotContain("Type\\\":");
+            capturedRequestBody.Should().NotContain("Items\\\":");
+            capturedRequestBody.Should().NotContain("Facts\\\":");
+            capturedRequestBody.Should().NotContain("Text\\\":");
         }
     }
 }
