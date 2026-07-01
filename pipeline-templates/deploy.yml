@@ -29,7 +29,8 @@ jobs:
             resourceGroupName: ''
             appSettings: |
                [
-                { "name": "TeamsWebhookURL2", "value": "$(TeamsWebhookURL2)" }
+                { "name": "TeamsWebhookURL2", "value": "$(TeamsWebhookURL2)" },
+                { "name": "TeamsWebhookURL", "value": "$(TeamsWebhookURL)" }
                 
                ]
 
