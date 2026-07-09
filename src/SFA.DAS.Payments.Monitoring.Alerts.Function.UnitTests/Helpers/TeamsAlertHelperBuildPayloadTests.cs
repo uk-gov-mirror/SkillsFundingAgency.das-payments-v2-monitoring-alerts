@@ -30,6 +30,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
         {
             _result = new TeamsAlertHelper().BuildAlertPayload(new AlertParameters()
             {
+                AccountedForPayments = AccountedForPayments,
                 AlertEmoji = AlertEmoji,
                 Timestamp = Timestamp,
                 JobId = JobId,
@@ -39,8 +40,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.UnitTests.Helpers
                 YearToDatePayments = YearToDatePayments,
                 NumberOfLearners = NumberOfLearners,
                 AlertTitle = AlertTitle,
-                AppInsightsSearchResultsUiLink = AppInsightsSearchResultsUiLink,
-                AccountedForPayments = AccountedForPayments,
+                AppInsightsSearchResultsUiLink = AppInsightsSearchResultsUiLink
             });
         }
 
