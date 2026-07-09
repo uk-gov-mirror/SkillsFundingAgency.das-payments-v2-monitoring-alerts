@@ -17,7 +17,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
                     new
                     {
                         type = "TextBlock",
-                        text = $"{alertParameters.AlertEmoji} {alertParameters.AlertTitle}.",
+                        text = $"{alertParameters.AlertEmoji} {alertParameters.AlertTitle}",
                         weight = "bolder",
                         size = "medium",
                         wrap = true
@@ -70,10 +70,10 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
         {
             return severity switch
             {
-                "Sev0" or "Sev1" => "Attention", // Red
-                "Sev2" => "Warning", // Yellow
-                "Sev3" => "Good", // Green
-                _ => "Default", // Default to white
+                "Sev0" or "Sev1" => "attention", // Red
+                "Sev2" => "warning", // Yellow
+                "Sev3" => "good", // Green
+                _ => "default", // Default to white
             };
         }
 
@@ -234,6 +234,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function.Helpers
             return alertTitleFormat;
         }
 
+        //Not currently implemented
         public string GetAlertText(string alertTextFormat, Dictionary<string, string> alertVariables)
         {
             foreach (var alertVariable in alertVariables)
