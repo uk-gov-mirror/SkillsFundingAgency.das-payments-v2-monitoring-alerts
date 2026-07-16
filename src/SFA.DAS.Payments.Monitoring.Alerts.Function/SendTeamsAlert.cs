@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -10,21 +11,21 @@ using SFA.DAS.Payments.Monitoring.Alerts.Function.Services;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 {
-    public class SendSlackAlert
+    public class SendTeamsAlert
     {
-        private readonly ISlackService _slackService;
+        private readonly ITeamsService _teamsService;
 
-        public SendSlackAlert(ISlackService slackService)
+        public SendTeamsAlert(ITeamsService teamsService)
         {
-            _slackService = slackService;
+            _teamsService = teamsService;
         }
 
         [FunctionName("HttpTrigger1")]
         public async Task<IActionResult> SendToChannelOne(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            var slackChannelUri =
-                Environment.GetEnvironmentVariable("SlackChannelUri", EnvironmentVariableTarget.Process);
+            var teamsWebhookURL =
+                Environment.GetEnvironmentVariable("TeamsWebhookURL", EnvironmentVariableTarget.Process);
 
             log.LogInformation("HttpTrigger1 function processed a request.");
 
@@ -32,17 +33,17 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 
             log.LogInformation($"Request: {requestBody}.");
 
-            await _slackService.PostSlackAlert(requestBody, slackChannelUri);
+            var result = await _teamsService.PostTeamsAlert(requestBody, teamsWebhookURL,log);
 
-            return new OkObjectResult("");
+            return result == null? new OkObjectResult("") : new OkObjectResult(result.exception + "\n" + result.innerException);
         }
 
         [FunctionName("HttpTrigger2")]
         public async Task<IActionResult> SendToChannelTwo(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
-            var slackChannelUri =
-                Environment.GetEnvironmentVariable("SlackChannelUri2", EnvironmentVariableTarget.Process);
+            var teamsWebhookURL =
+                Environment.GetEnvironmentVariable("TeamsWebhookURL2", EnvironmentVariableTarget.Process);
 
             log.LogInformation("HttpTrigger2 function processed a request.");
 
@@ -50,7 +51,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
 
             log.LogInformation($"Request: {requestBody}.");
 
-            await _slackService.PostSlackAlert(requestBody, slackChannelUri);
+            await _teamsService.PostTeamsAlert(requestBody, teamsWebhookURL,log);
 
             return new OkObjectResult("");
         }

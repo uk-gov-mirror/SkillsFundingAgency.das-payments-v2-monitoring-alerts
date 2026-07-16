@@ -40,11 +40,10 @@ Populate as follows:
 {
   "IsEncrypted": false,
   "Values": {
-    "SlackBaseUrl": "https://hooks.slack.com",
     "AppInsightsAuthHeader": "x-api-key",
     "AppInsightsAuthValue": "api-key",
-    "SlackChannelUri": "[CREATE A TEST SLACK CHANNEL INSTANCE AND CONFIGURE THE /services URL HERE]",
-    "SlackChannelUri2": "[CREATE A TEST SLACK CHANNEL INSTANCE AND CONFIGURE THE /services URL HERE]"
+    "TeamsWebhookURL": "[TEAMS WEBHOOK URL FOR THE GROUP CHAT]",
+    "TeamsWebhookURL2": "[TEAMS WEBHOOK URL FOR THE GROUP CHAT]"
   }
 }
 ```

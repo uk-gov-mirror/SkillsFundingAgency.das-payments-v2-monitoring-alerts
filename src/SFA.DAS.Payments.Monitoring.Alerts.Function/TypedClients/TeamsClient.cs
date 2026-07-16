@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients
 {
-    public class SlackClient : ISlackClient
+    public class TeamsClient : ITeamsClient
     {
         private readonly HttpClient _httpClient;
 
-        public SlackClient(HttpClient httpClient)
+        public TeamsClient(HttpClient httpClient)
         {
             _httpClient = httpClient;
         }

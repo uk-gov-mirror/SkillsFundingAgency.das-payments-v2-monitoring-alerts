@@ -28,14 +28,11 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
             AddAppInsightsClient(builder);
 
             builder.Services
-                .AddHttpClient<ISlackClient, SlackClient>(x =>
-                {
-                    x.BaseAddress = new Uri(GetEnvironmentVariable("SlackBaseUrl"));
-                });
+                .AddHttpClient<ITeamsClient, TeamsClient>();
 
             builder.Services.AddTransient<IDynamicJsonDeserializer, DynamicJsonDeserializer>();
-            builder.Services.AddTransient<ISlackAlertHelper, SlackAlertHelper>();
-            builder.Services.AddTransient<ISlackService, SlackService>();
+            builder.Services.AddTransient<ITeamsAlertHelper, TeamsAlertHelper>();
+            builder.Services.AddTransient<ITeamsService, TeamsService>();
         }
 
         private static void AddAppInsightsClient(IFunctionsHostBuilder builder)

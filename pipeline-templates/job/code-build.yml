@@ -11,14 +11,14 @@ jobs:
      
   - group: BUILD Management Resources
   steps:
-  - template: /azure-pipelines-templates/build/step/gitversion.yml
 
-  
   - task: UseDotNet@2
     displayName: 'Use .NET Core sdk 6.0.x'
     inputs:
       version: 6.0.x
       performMultiLevelLookup: true
+
+  - template: /azure-pipelines-templates/build/step/gitversion.yml
 
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
