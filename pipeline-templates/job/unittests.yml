@@ -9,7 +9,8 @@ jobs:
 
   variables:
     BuildConfiguration: 'Release'
-
+    
+  steps:
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
     inputs:
