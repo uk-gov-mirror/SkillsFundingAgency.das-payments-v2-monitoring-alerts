@@ -50,17 +50,25 @@ jobs:
 
   - task: MSBuild@1
     displayName: 'Build solution MonitoringAlertsFunction'
+    enabled: true
+
     inputs:
-      solution: src/SFA.DAS.Payments.Monitoring.Alerts.Function/SFA.DAS.Payments.Monitoring.Alerts.Function.csproj
-      msbuildArchitecture: x64
+      solution: 'src/SFA.DAS.Payments.Monitoring.Alerts.Function/SFA.DAS.Payments.Monitoring.Alerts.Function.csproj'
+      msbuildArchitecture: 'x64'
       platform: '$(BuildPlatform)'
       configuration: '$(BuildConfiguration)'
-      msbuildArguments: '/p:version=$(Build.BuildNumber) /p:FileVersion=$(Build.BuildNumber) /p:OutputPath=$(build.artifactstagingdirectory)\Monitoring-Alerts-Function'
+
+      msbuildArguments: >
+        /p:Version=1.0.0
+        /p:AssemblyVersion=1.0.0.0
+        /p:FileVersion=1.0.0.0
+        /p:InformationalVersion="1.0.0+build.$(Build.BuildId)"
+        /p:OutputPath="$(Build.ArtifactStagingDirectory)\Monitoring-Alerts-Function"
+
       clean: true
       maximumCpuCount: true
       logProjectEvents: true
       createLogFile: true
-      enabled: false
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish Pipeline Artifact'
