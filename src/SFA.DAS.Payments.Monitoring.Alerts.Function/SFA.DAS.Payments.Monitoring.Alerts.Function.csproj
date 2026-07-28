@@ -4,6 +4,7 @@
 	  <AzureFunctionsVersion>v4</AzureFunctionsVersion>
 	  <OutputType>Exe</OutputType>
 	  <ImplicitUsings>enable</ImplicitUsings>
+	  <SelfContained>True</SelfContained>
   </PropertyGroup>
   <ItemGroup>
 	  <FrameworkReference Include="Microsoft.AspNetCore.App" />
