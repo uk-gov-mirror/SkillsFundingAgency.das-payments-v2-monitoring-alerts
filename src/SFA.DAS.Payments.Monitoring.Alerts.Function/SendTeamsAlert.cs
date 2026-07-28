@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
 using SFA.DAS.Payments.Monitoring.Alerts.Function.Services;
 
@@ -20,7 +19,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
             _teamsService = teamsService;
         }
 
-        [FunctionName("HttpTrigger1")]
+        [Function("HttpTrigger1")]
         public async Task<IActionResult> SendToChannelOne(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {
@@ -38,7 +37,7 @@ namespace SFA.DAS.Payments.Monitoring.Alerts.Function
             return result == null? new OkObjectResult("") : new OkObjectResult(result.exception + "\n" + result.innerException);
         }
 
-        [FunctionName("HttpTrigger2")]
+        [Function("HttpTrigger2")]
         public async Task<IActionResult> SendToChannelTwo(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, ILogger log)
         {

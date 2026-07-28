@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Json;
 
 namespace SFA.DAS.Payments.Monitoring.Alerts.Function.TypedClients
 {
