@@ -54,8 +54,6 @@ static IAsyncPolicy<HttpResponseMessage> GetDefaultRetryPolicy()
             retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
             (outcome, timespan, retryAttempt, context) =>
             {
-                // Logging is not directly available here in isolated worker
-                // Consider injecting ILogger if needed elsewhere
             });
 }
 
