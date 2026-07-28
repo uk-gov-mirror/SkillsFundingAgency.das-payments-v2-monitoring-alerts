@@ -38,7 +38,6 @@ var host = new HostBuilder()
 
         services.AddTransient<IDynamicJsonDeserializer, DynamicJsonDeserializer>();
         services.AddTransient<ITeamsAlertHelper, TeamsAlertHelper>();
-        services.AddTransient<ITeamsClient, TeamsClient>();
     })
     .Build();
 

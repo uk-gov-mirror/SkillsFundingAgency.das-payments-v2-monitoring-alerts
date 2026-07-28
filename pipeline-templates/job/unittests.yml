@@ -10,13 +10,6 @@ jobs:
   variables:
     BuildConfiguration: 'Release'
 
-  steps:
-  - task: UseDotNet@2
-    displayName: 'Use .NET Core sdk 8.0.x'
-    inputs:
-      version: 8.0.x
-      performMultiLevelLookup: true
-
   - task: DotNetCoreCLI@2
     displayName: 'dotnet restore'
     inputs:
